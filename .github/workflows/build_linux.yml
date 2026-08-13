@@ -41,6 +41,12 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Install X11 dependencies
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build cmake libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
+
       # Setup CMake
       - name: Set up CMake for Linux
         shell: bash
