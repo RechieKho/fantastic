@@ -21,7 +21,7 @@ message(STATUS "Detected Project Name: ${PROJECT_NAME}")
 project(
     "${PROJECT_NAME}"
     VERSION "${GIT_TAG_VERSION}"
-    LANGUAGES CXX
+    LANGUAGES CXX C
 )
 
 set(CMAKE_CXX_STANDARD 17)
