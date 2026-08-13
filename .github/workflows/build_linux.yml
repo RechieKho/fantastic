@@ -5,6 +5,9 @@ on:
   workflow_call:
 
 jobs:
+  setup_metadata:
+    uses: ./.github/workflows/setup_metadata.yml
+
   build:
     needs: setup_metadata
     runs-on: ${{ matrix.os }}
