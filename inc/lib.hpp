@@ -2,15 +2,15 @@
 #define LIB_HPP
 
 #if defined(_WIN32) || defined(_WIN64)
-    #define PLATFORM_WINDOWS
+#define PLATFORM_WINDOWS
 #elif defined(__APPLE__) || defined(__MACH__)
-    #define PLATFORM_MACOS
+#define PLATFORM_MACOS
 #elif defined(__linux__)
-    #define PLATFORM_LINUX
+#define PLATFORM_LINUX
 #else
-    #error "Unsupported platform"  
+#error "Unsupported platform"
 #endif
 
-namespace LIBRARY_NAME { }
+namespace LIBRARY_NAME {}
 
 #endif // LIB_HPP
