@@ -1,9 +1,13 @@
 # Fantastic: A Raylib Template Project
 
-`fantastic` is a simple raylib template project with all the necessary things to get started, including:
-- Concise `CMakeLists.txt` that builds the project.
-- Github workflows that builds and publish the binary to all major desktop platform (windows, macos, linux).
-- Raylib demo from the official website.
+`fantastic` provides a clean starting point for Raylib projects. It includes:
 
-To get started, use this project as a template, and change content of the `PROJECT_NAME` file with your name.
-Then, it will synchronize the project name with the builds.
+* A ready-to-use `CMakeLists.txt`.
+* Automated GitHub workflows for cross-platform builds (Windows, macOS, Linux).
+* An official Raylib code example to verify your setup.
+
+### How to Use:
+
+1. Create a new repository using this template.
+2. Replace the contents of the `PROJECT_NAME` file with your desired project name.
+3. Build names will sync automatically!
