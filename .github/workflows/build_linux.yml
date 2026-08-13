@@ -1,0 +1,67 @@
+name: Build For Linux
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  build:
+    needs: setup_metadata
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        target: [linux]
+        arch: [x86_64]
+        build_type: [release, debug]
+        include:
+          # Build type to cmake keyword.
+          - build_type: release
+            cmake_build_type_keyword: Release
+
+          - build_type: debug
+            cmake_build_type_keyword: RelWithDebInfo
+
+          # Define host for each target.
+          - os: ubuntu-latest
+            target: linux
+
+          # Define toolchain data.
+          - target: linux
+            arch: x86_64
+            dependencies: ""
+            cxxflags: -m64
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      # Setup CMake
+      - name: Set up CMake for Linux
+        shell: bash
+        run: |
+          if [ ! -d "${{ github.workspace }}/build" ]; then
+            mkdir "${{ github.workspace }}/build"
+          fi
+          cd "${{ github.workspace }}/build"
+          cmake "${{ github.workspace }}" -G Ninja -DCMAKE_BUILD_TYPE="${{ matrix.cmake_build_type_keyword }}" \
+            -DCMAKE_CXX_FLAGS="${{ matrix.cxxflags }}"
+
+      - name: Build project
+        shell: bash
+        run: ninja -C "${{ github.workspace }}/build"
+
+      - name: Show build files
+        shell: bash
+        working-directory: build
+        run: ls -lR
+
+      - name: Export binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ needs.setup_metadata.outputs.project_name }}-${{ matrix.target }}-${{ matrix.arch }}-${{ matrix.build_type }}-${{ needs.setup_metadata.outputs.version }}-${{ needs.setup_metadata.outputs.commit_hash }}
+          path: |
+            ${{ github.workspace }}/build/${{ needs.setup_metadata.outputs.project_name }}
+          if-no-files-found: error
