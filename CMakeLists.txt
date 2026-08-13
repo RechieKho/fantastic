@@ -4,7 +4,7 @@ find_package(Git QUIET)
 if(GIT_FOUND)
     # Run git describe to get the latest tag
     execute_process(
-        COMMAND ${GIT_EXECUTABLE} describe --tags --always --dirty
+        COMMAND ${GIT_EXECUTABLE} describe --tags --dirty
         OUTPUT_VARIABLE GIT_TAG_VERSION
         OUTPUT_STRIP_TRAILING_WHITESPACE
         ERROR_QUIET
