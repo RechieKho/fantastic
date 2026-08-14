@@ -3,6 +3,11 @@ name: Setup Metadata
 on:
   workflow_dispatch:
   workflow_call:
+    outputs:
+      project_name: ${{ jobs.setup_metadata.outputs.project_name }}
+      version: ${{ jobs.setup_metadata.outputs.version }}
+      commit_hash: ${{ jobs.setup_metadata.outputs.commit_hash }}
+      commit_date: ${{ jobs.setup_metadata.outputs.commit_date }}
 
 jobs:
   setup_metadata:
