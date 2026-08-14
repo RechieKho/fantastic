@@ -18,17 +18,22 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Download iree-gd
+      - name: Merge artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ needs.setup_metadata.outputs.project_name }}
+          pattern: ${{ needs.setup_metadata.outputs.project_name }}-*
+
+      - name: Download Artifact
         uses: dawidd6/action-download-artifact@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           workflow: runner.yml
-          name: ${{ needs.setup_metadata.outputs.project_name }}-*
-          skip_unpack: true
+          name: ${{ needs.setup_metadata.outputs.project_name }} 
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
-            ${{ github.workspace }}/${{ needs.setup_metadata.outputs.project_name }}-*
+            ${{ github.workspace }}/*
