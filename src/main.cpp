@@ -1,7 +1,7 @@
 #include <raylib.h>
 #include <iostream>
 
-#include "lib.hpp"
+namespace LIBRARY_NAME {}
 
 int main() {
 	// From raylib's examples: https://www.raylib.com/examples.html
