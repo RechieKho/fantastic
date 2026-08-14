@@ -64,7 +64,7 @@ jobs:
       - name: Export binary
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ needs.setup_metadata.outputs.project_name }}-${{ matrix.target }}-${{ matrix.arch }}-${{ matrix.build_type }}-${{ needs.setup_metadata.outputs.version }}-${{ needs.setup_metadata.outputs.commit_hash }}
+          name: ${{ needs.setup_metadata.outputs.project_name }}-${{ matrix.target }}-${{ matrix.arch }}-${{ matrix.build_type }}
           path: |
             ${{ github.workspace }}/build/${{ needs.setup_metadata.outputs.project_name }}
           if-no-files-found: error
