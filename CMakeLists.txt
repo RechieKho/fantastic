@@ -71,3 +71,10 @@ target_link_libraries(
     PRIVATE
     ${LIBRARY_NAME}
 )
+
+get_directory_property(HAS_PARENT PARENT_DIRECTORY)
+
+if(HAS_PARENT)
+    # Safe to use PARENT_SCOPE
+    set("${PROJECT_NAME}_LIBRARY_NAME" "${LIBRARY_NAME}" PARENT_SCOPE)
+endif()
