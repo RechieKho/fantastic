@@ -24,10 +24,13 @@ project(
     LANGUAGES CXX C
 )
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+find_package(raylib QUIET)
+
+if(NOT TARGET raylib AND NOT raylib_FOUND)
 include(FetchContent)
 
 FetchContent_Declare(
@@ -38,8 +41,10 @@ FetchContent_Declare(
 
 block(SCOPE_FOR VARIABLES)
     # Configuration variables for `raylib`.
+    set(BUILD_EXAMPLES OFF CACHE INTERNAL "")
     FetchContent_MakeAvailable(raylib)
 endblock()
+endif()
 
 set(EXECUTABLE_NAME "${PROJECT_NAME}")
 set(LIBRARY_NAME "lib${PROJECT_NAME}")
