@@ -1,0 +1,17 @@
+name: Bundle
+
+on:
+  workflow_call:
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Merge artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ needs.setup_metadata.outputs.project_name }}
+          pattern: ${{ needs.setup_metadata.outputs.project_name }}-*

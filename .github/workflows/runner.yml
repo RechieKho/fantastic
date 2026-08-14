@@ -11,12 +11,17 @@ on:
 jobs:
   lint:
     uses: ./.github/workflows/lint.yml
+  setup_metadata:
+    uses: ./.github/workflows/setup_metadata.yml
   build_linux:
-    needs: [lint]
+    needs: [lint, setup_metadata]
     uses: ./.github/workflows/build_linux.yml
   build_macos:
-    needs: [lint]
+    needs: [lint, setup_metadata]
     uses: ./.github/workflows/build_macos.yml
   build_windows:
-    needs: [lint]
+    needs: [lint, setup_metadata]
     uses: ./.github/workflows/build_windows.yml
+  bundle:
+    needs: [build_linux, build_macos, build_windows, setup_metadata]
+    uses: ./.github/workflows/bundle.yml
