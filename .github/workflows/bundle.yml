@@ -4,7 +4,11 @@ on:
   workflow_call:
 
 jobs:
+  setup_metadata:
+    uses: ./.github/workflows/setup_metadata.yml
+  
   bundle:
+    needs: setup_metadata
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
