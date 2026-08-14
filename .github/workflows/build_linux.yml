@@ -66,10 +66,16 @@ jobs:
         working-directory: build
         run: ls -lR
 
+      - name: Rename binary
+        shell: bash
+        run: |
+          mv "${{ github.workspace }}/build/${{ needs.setup_metadata.outputs.project_name }}" \
+             "${{ github.workspace }}/build/${{ needs.setup_metadata.outputs.project_name }}-${{ matrix.target }}-${{ matrix.arch }}-${{ matrix.build_type }}"
+
       - name: Export binary
         uses: actions/upload-artifact@v4
         with:
           name: ${{ needs.setup_metadata.outputs.project_name }}-${{ matrix.target }}-${{ matrix.arch }}-${{ matrix.build_type }}
           path: |
-            ${{ github.workspace }}/build/${{ needs.setup_metadata.outputs.project_name }}
+            ${{ github.workspace }}/build/${{ needs.setup_metadata.outputs.project_name }}-${{ matrix.target }}-${{ matrix.arch }}-${{ matrix.build_type }}
           if-no-files-found: error

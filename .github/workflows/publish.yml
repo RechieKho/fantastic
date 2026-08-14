@@ -30,4 +30,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
-            ${{ github.workspace }}/*
+            ${{ github.workspace }}/${{ needs.setup_metadata.outputs.project_name }}*

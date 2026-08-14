@@ -61,10 +61,16 @@ jobs:
         working-directory: build
         run: dir /s
 
+      - name: Rename binary
+        shell: cmd
+        run: |
+          rename "${{ github.workspace }}\\build\\${{ needs.setup_metadata.outputs.project_name }}.exe" \
+                 "${{ needs.setup_metadata.outputs.project_name }}-${{ matrix.target }}-${{ matrix.arch }}-${{ matrix.build_type }}.exe"
+
       - name: Export binary
         uses: actions/upload-artifact@v7
         with:
           name: ${{ needs.setup_metadata.outputs.project_name }}-${{ matrix.target }}-${{ matrix.arch }}-${{ matrix.build_type }}
           path: |
-            ${{ github.workspace }}\build\${{ needs.setup_metadata.outputs.project_name }}.exe
+            ${{ github.workspace }}\build\${{ needs.setup_metadata.outputs.project_name }}-${{ matrix.target }}-${{ matrix.arch }}-${{ matrix.build_type }}.exe
           if-no-files-found: error
