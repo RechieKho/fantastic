@@ -41,11 +41,11 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Install X11 dependencies
+      - name: Install dependencies
         shell: bash
         run: |
           sudo apt-get update
-          sudo apt-get install -y ninja-build cmake libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
+          sudo apt-get install -y ninja-build cmake libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev build-essential libgl1-mesa-dev libglu1-mesa-dev
 
       # Setup CMake
       - name: Set up CMake for Linux
